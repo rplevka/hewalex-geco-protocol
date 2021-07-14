@@ -109,6 +109,18 @@ def HewalexWaitForResponse(timeout):
           processed = 1
         if iReg==166:
           client.publish(mqttPrefix+"decoded/TotalEnergy",int(hexstr,16)/10)
+          processed = 1
+        if iReg==240:
+          client.publish(mqttPrefix+"decoded/SettingNightCoolingEnabled",int(hexstr,16))
+          processed = 1
+        if iReg==242:
+          client.publish(mqttPrefix+"decoded/SettingNightCoolingTempOn",int(hexstr,16))
+          processed = 1
+        if iReg==244:
+          client.publish(mqttPrefix+"decoded/SettingNightCoolingTempOff",int(hexstr,16))
+          processed = 1
+        if iReg==246:
+          client.publish(mqttPrefix+"decoded/SettingNightCoolingHourOff",int(hexstr,16))
         # only unprocessed data goes to /raw topic
         if processed == 0:
           client.publish(mqttPrefix+"raw/"+str(iReg),hexstr)
